@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { create } from './contactSlice';
 
 function AddContact() {
@@ -8,7 +8,23 @@ function AddContact() {
 
   const dispatch = useDispatch();
 
+  const { contactList } = useSelector(state => state.contact);
+
+  function checkNumber(number) {
+    if (!number.match(/^([0-9]{3}-[0-9]{3}-[0-9]{3})/)) return false;
+
+    const numberList = contactList.map(contact => contact.number);
+    for (let i = 0; i < numberList.length; i++)
+      if (numberList[i] === number) return false;
+
+    return true;
+  }
+
   function handleContact() {
+    if (!checkNumber(number)) {
+      alert('The number should have the format 123-456-789 and be unique');
+      return;
+    }
     if (!name || !number) return;
 
     dispatch(create(name, number));

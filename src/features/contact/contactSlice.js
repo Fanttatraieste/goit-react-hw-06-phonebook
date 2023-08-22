@@ -12,6 +12,7 @@ const contactSlice = createSlice({
   reducers: {
     create: {
       prepare(name, number) {
+        // if (!checkNumber(number)) return;
         return { payload: { name, number } };
       },
 
