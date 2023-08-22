@@ -53,21 +53,25 @@ function Contacts() {
   const { contactList } = contact || [];
 
   return (
-    <>
-      <div>
-        <h2>Contacts</h2>
-        <div className="inputs">
-          <div>
-            <label>Search contacts by name</label>
-            <input value={name} onChange={e => setName(e.target.value)} />
-          </div>
+    <div>
+      <h2>Contacts</h2>
+      <div className="inputs">
+        <div>
+          <label>Search contacts by name</label>
+          <input value={name} onChange={e => setName(e.target.value)} />
         </div>
+        {!name &&
+          contactList.map(el => (
+            <Contact name={el.name} number={el.number} key={el.number} />
+          ))}
+        {name &&
+          contactList
+            .filter(el => el.name.toLowerCase().includes(name.toLowerCase()))
+            .map(el => (
+              <Contact name={el.name} number={el.number} key={el.number} />
+            ))}
       </div>
-
-      {contactList.map(el => (
-        <Contact name={el.name} number={el.number} key={el.number} />
-      ))}
-    </>
+    </div>
   );
 }
 
