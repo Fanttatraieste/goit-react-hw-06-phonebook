@@ -3,6 +3,8 @@ import Customer from './features/customer/Customer';
 import AccountOperations from './features/account/AccountOperations';
 import BalanceDisplay from './features/account/BalanceDisplay';
 import { useSelector } from 'react-redux';
+import AddContact from 'features/contact/AddContact';
+import Contacts from 'features/contact/Contacts';
 
 function App() {
   const name = useSelector(state => state.customer.fullName);
@@ -20,6 +22,8 @@ function App() {
           <Customer />
           <AccountOperations />
           <BalanceDisplay />
+          <AddContact />
+          <Contacts />
         </>
       )}
     </div>
